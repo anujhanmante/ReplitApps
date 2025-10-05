@@ -1,9 +1,20 @@
-import './App.css'
+import React from "react";
+import { AuthProvider, useAuth } from "./AuthContext";
+import Auth from "./components/Auth";
+import Dashboard from "./components/Dashboard";
 
-export default function App() {
+const AppContent = () => {
+  const { user } = useAuth();
+
+  return user ? <Dashboard /> : <Auth />;
+};
+
+const App = () => {
   return (
-    <main>
-      React ⚛️ + Vite ⚡ + Replit!
-    </main>
-  )
-}
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+};
+
+export default App;
